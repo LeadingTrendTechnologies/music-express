@@ -2,24 +2,28 @@ import React from 'react'
 
 import type { ServiceHeroBlock as ServiceHeroBlockProps } from '@/payload-types'
 
+import { mediaUrl } from '../shared/media'
 import { HeroGallery } from './HeroGallery'
 
 export const ServiceHeroBlock: React.FC<ServiceHeroBlockProps> = ({
   ctaLine1,
   ctaLine2,
   headlines,
-  backgroundImageUrl,
+  backgroundImage,
   galleryImages,
 }) => {
-  const images = (galleryImages || []).map((g) => g.url).filter(Boolean) as string[]
+  const images = (galleryImages || [])
+    .map((g) => mediaUrl(g.image))
+    .filter(Boolean) as string[]
+  const bgUrl = mediaUrl(backgroundImage)
 
   return (
     <section className="relative min-h-[580px] overflow-hidden bg-[#192438]">
-      {backgroundImageUrl && (
+      {bgUrl && (
         <div className="absolute inset-0 z-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={backgroundImageUrl}
+            src={bgUrl}
             alt=""
             className="h-full w-full object-cover opacity-35"
           />

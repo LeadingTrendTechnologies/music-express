@@ -119,7 +119,11 @@ export const plugins: Plugin[] = [
   vercelBlobStorage({
     enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
     collections: {
-      media: true,
+      // Serve media straight from the Blob CDN (public store) instead of
+      // streaming through the Next.js server.
+      media: {
+        disablePayloadAccessControl: true,
+      },
     },
     token: process.env.BLOB_READ_WRITE_TOKEN || '',
   }),

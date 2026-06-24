@@ -11,10 +11,11 @@ export const OwnerQuote: Block = {
   },
   fields: [
     {
-      name: 'photoUrl',
-      type: 'text',
+      name: 'photo',
+      type: 'upload',
+      relationTo: 'media',
       admin: {
-        description: 'Full URL of the owner photo.',
+        description: 'Owner photo.',
       },
     },
     {

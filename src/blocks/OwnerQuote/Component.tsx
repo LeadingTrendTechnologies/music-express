@@ -2,19 +2,23 @@ import React from 'react'
 
 import type { OwnerQuoteBlock as OwnerQuoteBlockProps } from '@/payload-types'
 
+import { mediaUrl } from '../shared/media'
+
 export const OwnerQuoteBlock: React.FC<OwnerQuoteBlockProps> = ({
-  photoUrl,
+  photo,
   quote,
   name,
   role,
 }) => {
+  const photoSrc = mediaUrl(photo)
+
   return (
     <div className="mx-auto max-w-[1000px] px-5">
       <div className="my-[10px] flex flex-wrap items-center justify-center gap-10 rounded-[4px] bg-[#b7b7b7] px-[30px] py-10">
-        {photoUrl && (
+        {photoSrc && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={photoUrl}
+            src={photoSrc}
             alt={name || ''}
             className="h-[220px] w-[220px] shrink-0 rounded-full object-cover md:h-[300px] md:w-[300px]"
           />

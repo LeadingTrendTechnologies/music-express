@@ -1,7 +1,6 @@
 import type { RequiredDataFromCollectionSlug } from 'payload'
 
-const NEBULA = '?AccessKeyId=042735BF8B97AAF39122&disposition=0&alloworigin=1'
-const img = (id: string) => `https://nebula.wsimg.com/${id}${NEBULA}`
+import { mediaId } from './assets'
 
 const logoIds = [
   '889af49ab9ce47fa765796db76f2f34c',
@@ -160,7 +159,7 @@ export const equipmentStatic: RequiredDataFromCollectionSlug<'pages'> = {
     {
       blockName: 'Equipment',
       blockType: 'equipmentList',
-      logos: logoIds.map((id) => ({ url: img(id), alt: 'Equipment brand' })),
+      logos: logoIds.map((id) => ({ image: mediaId(id)!, alt: 'Equipment brand' })),
       groups,
     },
   ],

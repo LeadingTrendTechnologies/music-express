@@ -1,7 +1,6 @@
 import type { RequiredDataFromCollectionSlug } from 'payload'
 
-const NEBULA = '?AccessKeyId=042735BF8B97AAF39122&disposition=0&alloworigin=1'
-const img = (id: string) => `https://nebula.wsimg.com/${id}${NEBULA}`
+import { mediaId } from './assets'
 
 // Used for pre-seeded content so that the homepage is not empty
 export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
@@ -28,17 +27,17 @@ export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
         { label: 'video' },
         { label: 'production' },
       ],
-      backgroundImageUrl: img('5b53b03de359245f9a8dc5acf9845455'),
+      backgroundImage: mediaId('5b53b03de359245f9a8dc5acf9845455'),
       galleryImages: [
-        { url: img('66ee98dd12f0f06f4fd2b3b6208dd9a5') },
-        { url: img('7f5ab9bdd164a4b08fb06f28cd956cb5') },
-        { url: img('4d1976a30fe3ca903d7dbc5a36e94b93') },
-        { url: img('ddfa1bbc8e588ab2e750bee7b60cb217') },
-        { url: img('13841a6b68748cc54dc21b21916bbd8f') },
-        { url: img('22af1e583edc9b486847f3d5186fc914') },
-        { url: img('04406270cfa3c87ea0d9fd740e037a62') },
-        { url: img('0718926b80b5d4c4fdc2a7e34172f426') },
-        { url: img('c662cff33581272f4b62e5b3a397f485') },
+        { image: mediaId('66ee98dd12f0f06f4fd2b3b6208dd9a5')! },
+        { image: mediaId('7f5ab9bdd164a4b08fb06f28cd956cb5')! },
+        { image: mediaId('4d1976a30fe3ca903d7dbc5a36e94b93')! },
+        { image: mediaId('ddfa1bbc8e588ab2e750bee7b60cb217')! },
+        { image: mediaId('13841a6b68748cc54dc21b21916bbd8f')! },
+        { image: mediaId('22af1e583edc9b486847f3d5186fc914')! },
+        { image: mediaId('04406270cfa3c87ea0d9fd740e037a62')! },
+        { image: mediaId('0718926b80b5d4c4fdc2a7e34172f426')! },
+        { image: mediaId('c662cff33581272f4b62e5b3a397f485')! },
       ],
     },
     {
@@ -59,7 +58,7 @@ export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
           title: 'We can get what you need',
           description: 'We can supply you with the equipment you need for your next event.',
           mediaType: 'image',
-          imageUrl: img('2fa620451fa2b278d5d9df928277252f'),
+          image: mediaId('2fa620451fa2b278d5d9df928277252f'),
           imageAlt: 'Seismic Audio',
           buttonLabel: 'Learn More',
           buttonHref: '/contact-us',
@@ -80,7 +79,7 @@ export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
           description:
             'Your source of expert advice and how-to resources for musicians, composers, and songwriters.',
           mediaType: 'image',
-          imageUrl: img('cf29acacf729c64ee66fc8f959fab6e6'),
+          image: mediaId('cf29acacf729c64ee66fc8f959fab6e6'),
           imageAlt: 'The Music Kitchen',
           buttonLabel: 'Learn More',
           buttonHref: 'https://www.themusickitchen.com/',

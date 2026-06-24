@@ -1,7 +1,6 @@
 import type { RequiredDataFromCollectionSlug } from 'payload'
 
-const NEBULA = '?AccessKeyId=042735BF8B97AAF39122&disposition=0&alloworigin=1'
-const img = (id: string) => `https://nebula.wsimg.com/${id}${NEBULA}`
+import { mediaId } from './assets'
 
 export const aboutStatic: RequiredDataFromCollectionSlug<'pages'> = {
   slug: 'about-us',
@@ -54,7 +53,7 @@ export const aboutStatic: RequiredDataFromCollectionSlug<'pages'> = {
     {
       blockName: 'Owner',
       blockType: 'ownerQuote',
-      photoUrl: img('0b017a48ba4cfe46b8d503b4d121925e'),
+      photo: mediaId('0b017a48ba4cfe46b8d503b4d121925e'),
       quote:
         '"We put alot of pride in our relationships. We work hard to understand the event or project before we start. We don\'t try to talk over anyones head. Our goal is to get it right the first time."',
       name: 'Lloyd wileman',

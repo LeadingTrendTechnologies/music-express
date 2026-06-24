@@ -42,10 +42,11 @@ export const ServiceHero: Block = {
       ],
     },
     {
-      name: 'backgroundImageUrl',
-      type: 'text',
+      name: 'backgroundImage',
+      type: 'upload',
+      relationTo: 'media',
       admin: {
-        description: 'Full URL of the hero background image.',
+        description: 'Hero background image.',
       },
     },
     {
@@ -57,8 +58,9 @@ export const ServiceHero: Block = {
       },
       fields: [
         {
-          name: 'url',
-          type: 'text',
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
           required: true,
         },
       ],

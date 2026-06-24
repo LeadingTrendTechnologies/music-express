@@ -19,13 +19,17 @@ export const EquipmentList: Block = {
       },
       fields: [
         {
-          name: 'url',
-          type: 'text',
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
           required: true,
         },
         {
           name: 'alt',
           type: 'text',
+          admin: {
+            description: 'Optional. Overrides the alt text from the media item.',
+          },
         },
       ],
     },

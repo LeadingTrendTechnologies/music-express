@@ -469,12 +469,12 @@ export interface ServiceHeroBlock {
       }[]
     | null;
   /**
-   * Full URL of the hero background image.
+   * Hero background image.
    */
-  backgroundImageUrl?: string | null;
+  backgroundImage?: (string | null) | Media;
   galleryImages?:
     | {
-        url: string;
+        image: string | Media;
         id?: string | null;
       }[]
     | null;
@@ -497,7 +497,10 @@ export interface FeatureCardsBlock {
         description?: string | null;
         mediaType?: ('youtube' | 'image') | null;
         youtubeId?: string | null;
-        imageUrl?: string | null;
+        image?: (string | null) | Media;
+        /**
+         * Optional. Overrides the alt text from the media item.
+         */
         imageAlt?: string | null;
         buttonLabel?: string | null;
         buttonHref?: string | null;
@@ -592,9 +595,9 @@ export interface HeadingSectionBlock {
  */
 export interface OwnerQuoteBlock {
   /**
-   * Full URL of the owner photo.
+   * Owner photo.
    */
-  photoUrl?: string | null;
+  photo?: (string | null) | Media;
   quote: string;
   name?: string | null;
   role?: string | null;
@@ -635,7 +638,10 @@ export interface ClientsGridBlock {
 export interface EquipmentListBlock {
   logos?:
     | {
-        url: string;
+        image: string | Media;
+        /**
+         * Optional. Overrides the alt text from the media item.
+         */
         alt?: string | null;
         id?: string | null;
       }[]
@@ -1399,11 +1405,11 @@ export interface ServiceHeroBlockSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
-  backgroundImageUrl?: T;
+  backgroundImage?: T;
   galleryImages?:
     | T
     | {
-        url?: T;
+        image?: T;
         id?: T;
       };
   spacingTop?: T;
@@ -1425,7 +1431,7 @@ export interface FeatureCardsBlockSelect<T extends boolean = true> {
         description?: T;
         mediaType?: T;
         youtubeId?: T;
-        imageUrl?: T;
+        image?: T;
         imageAlt?: T;
         buttonLabel?: T;
         buttonHref?: T;
@@ -1510,7 +1516,7 @@ export interface HeadingSectionBlockSelect<T extends boolean = true> {
  * via the `definition` "OwnerQuoteBlock_select".
  */
 export interface OwnerQuoteBlockSelect<T extends boolean = true> {
-  photoUrl?: T;
+  photo?: T;
   quote?: T;
   name?: T;
   role?: T;
@@ -1550,7 +1556,7 @@ export interface EquipmentListBlockSelect<T extends boolean = true> {
   logos?:
     | T
     | {
-        url?: T;
+        image?: T;
         alt?: T;
         id?: T;
       };

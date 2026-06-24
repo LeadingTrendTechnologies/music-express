@@ -2,6 +2,8 @@ import React from 'react'
 
 import type { FeatureCardsBlock as FeatureCardsBlockProps } from '@/payload-types'
 
+import { mediaAlt, mediaUrl } from '../shared/media'
+
 export const FeatureCardsBlock: React.FC<FeatureCardsBlockProps> = ({ cards }) => {
   const items = cards || []
   if (items.length === 0) return null
@@ -13,6 +15,7 @@ export const FeatureCardsBlock: React.FC<FeatureCardsBlockProps> = ({ cards }) =
           const externalProps = card.buttonExternal
             ? { target: '_blank', rel: 'noopener noreferrer' }
             : {}
+          const cardImageUrl = mediaUrl(card.image)
 
           return (
             <div
@@ -30,12 +33,12 @@ export const FeatureCardsBlock: React.FC<FeatureCardsBlockProps> = ({ cards }) =
                       allowFullScreen
                     />
                   </div>
-                ) : card.imageUrl ? (
+                ) : cardImageUrl ? (
                   <div className="flex min-h-[100px] items-center justify-center bg-[#ddd] p-4">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={card.imageUrl}
-                      alt={card.imageAlt || card.title}
+                      src={cardImageUrl}
+                      alt={card.imageAlt || mediaAlt(card.image, card.title)}
                       className="max-h-[90px] w-auto object-contain"
                     />
                   </div>

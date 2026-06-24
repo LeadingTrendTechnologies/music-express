@@ -44,8 +44,9 @@ export const FeatureCards: Block = {
           },
         },
         {
-          name: 'imageUrl',
-          type: 'text',
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
           admin: {
             condition: (_, siblingData) => siblingData?.mediaType === 'image',
           },
@@ -54,6 +55,7 @@ export const FeatureCards: Block = {
           name: 'imageAlt',
           type: 'text',
           admin: {
+            description: 'Optional. Overrides the alt text from the media item.',
             condition: (_, siblingData) => siblingData?.mediaType === 'image',
           },
         },
