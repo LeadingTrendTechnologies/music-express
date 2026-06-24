@@ -1,15 +1,17 @@
 import type { Field } from 'payload'
 
 // Shared spacing scale used by every editable content block.
-export const spacingOptions = [
+const SPACING_VALUES = ['none', 'sm', 'md', 'lg', 'xl'] as const
+
+export type SpacingValue = (typeof SPACING_VALUES)[number]
+
+export const spacingOptions: { label: string; value: SpacingValue }[] = [
   { label: 'None', value: 'none' },
   { label: 'Small', value: 'sm' },
   { label: 'Medium', value: 'md' },
   { label: 'Large', value: 'lg' },
   { label: 'Extra Large', value: 'xl' },
-] as const
-
-export type SpacingValue = (typeof spacingOptions)[number]['value']
+]
 
 const SPACING_PX: Record<SpacingValue, string> = {
   none: '0px',

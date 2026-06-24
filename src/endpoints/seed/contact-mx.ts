@@ -132,7 +132,9 @@ export const contactFormMX: RequiredDataFromCollectionSlug<'forms'> = {
   ],
 }
 
-export const contactPageMX = (formId: number | string): RequiredDataFromCollectionSlug<'pages'> => ({
+export const contactPageMX = (
+  formId: number | string,
+): RequiredDataFromCollectionSlug<'pages'> => ({
   slug: 'contact-us',
   _status: 'published',
   title: 'Contact Us',
@@ -170,7 +172,7 @@ export const contactPageMX = (formId: number | string): RequiredDataFromCollecti
     {
       blockType: 'formBlock',
       enableIntro: false,
-      form: formId,
+      form: String(formId),
     },
   ],
 })
