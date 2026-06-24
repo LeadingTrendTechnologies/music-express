@@ -201,7 +201,23 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | ServiceHeroBlock
+    | FeatureCardsBlock
+    | ServiceAreaBlock
+    | PageHeaderBlock
+    | TextSectionBlock
+    | HeadingSectionBlock
+    | OwnerQuoteBlock
+    | ClientsGridBlock
+    | EquipmentListBlock
+    | ContactInfoBlock
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -441,6 +457,226 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceHeroBlock".
+ */
+export interface ServiceHeroBlock {
+  ctaLine1?: string | null;
+  ctaLine2?: string | null;
+  headlines?:
+    | {
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Full URL of the hero background image.
+   */
+  backgroundImageUrl?: string | null;
+  galleryImages?:
+    | {
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'serviceHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureCardsBlock".
+ */
+export interface FeatureCardsBlock {
+  cards?:
+    | {
+        title: string;
+        description?: string | null;
+        mediaType?: ('youtube' | 'image') | null;
+        youtubeId?: string | null;
+        imageUrl?: string | null;
+        imageAlt?: string | null;
+        buttonLabel?: string | null;
+        buttonHref?: string | null;
+        buttonExternal?: boolean | null;
+        extraButtonLabel?: string | null;
+        extraButtonHref?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featureCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceAreaBlock".
+ */
+export interface ServiceAreaBlock {
+  /**
+   * Comma-separated list of cities served.
+   */
+  cities?: string | null;
+  tagline?: string | null;
+  states?: string | null;
+  ctaLabel?: string | null;
+  ctaHref?: string | null;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'serviceArea';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PageHeaderBlock".
+ */
+export interface PageHeaderBlock {
+  title: string;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pageHeader';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextSectionBlock".
+ */
+export interface TextSectionBlock {
+  content: string;
+  color?: string | null;
+  fontSize?: string | null;
+  textAlign?: ('left' | 'center' | 'right') | null;
+  bold?: boolean | null;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeadingSectionBlock".
+ */
+export interface HeadingSectionBlock {
+  text: string;
+  level?: ('2' | '3') | null;
+  color?: string | null;
+  fontSize?: string | null;
+  textAlign?: ('left' | 'center' | 'right') | null;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'headingSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "OwnerQuoteBlock".
+ */
+export interface OwnerQuoteBlock {
+  /**
+   * Full URL of the owner photo.
+   */
+  photoUrl?: string | null;
+  quote: string;
+  name?: string | null;
+  role?: string | null;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ownerQuote';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ClientsGridBlock".
+ */
+export interface ClientsGridBlock {
+  heading?: string | null;
+  variant?: ('title' | 'heading') | null;
+  items?:
+    | {
+        name: string;
+        id?: string | null;
+      }[]
+    | null;
+  moreText?: string | null;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'clientsGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EquipmentListBlock".
+ */
+export interface EquipmentListBlock {
+  logos?:
+    | {
+        url: string;
+        alt?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  groups?:
+    | {
+        heading: string;
+        items?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'equipmentList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactInfoBlock".
+ */
+export interface ContactInfoBlock {
+  phone?: string | null;
+  email?: string | null;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactInfo';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "CallToActionBlock".
  */
 export interface CallToActionBlock {
@@ -483,6 +719,10 @@ export interface CallToActionBlock {
         id?: string | null;
       }[]
     | null;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'cta';
@@ -533,6 +773,10 @@ export interface ContentBlock {
         id?: string | null;
       }[]
     | null;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'content';
@@ -543,6 +787,10 @@ export interface ContentBlock {
  */
 export interface MediaBlock {
   media: string | Media;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -577,6 +825,10 @@ export interface ArchiveBlock {
         value: string | Post;
       }[]
     | null;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'archive';
@@ -603,6 +855,10 @@ export interface FormBlock {
     };
     [k: string]: unknown;
   } | null;
+  spacingTop?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingBottom?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingLeft?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
+  spacingRight?: ('none' | 'sm' | 'md' | 'lg' | 'xl') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'formBlock';
@@ -640,6 +896,10 @@ export interface Form {
             label?: string | null;
             width?: number | null;
             required?: boolean | null;
+            /**
+             * Optional placeholder text shown inside the field.
+             */
+            placeholder?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'email';
@@ -670,6 +930,10 @@ export interface Form {
             width?: number | null;
             defaultValue?: number | null;
             required?: boolean | null;
+            /**
+             * Optional placeholder text shown inside the field.
+             */
+            placeholder?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'number';
@@ -707,6 +971,10 @@ export interface Form {
             width?: number | null;
             defaultValue?: string | null;
             required?: boolean | null;
+            /**
+             * Optional placeholder text shown inside the field.
+             */
+            placeholder?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'text';
@@ -717,6 +985,10 @@ export interface Form {
             width?: number | null;
             defaultValue?: string | null;
             required?: boolean | null;
+            /**
+             * Optional placeholder text shown inside the field.
+             */
+            placeholder?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'textarea';
@@ -1084,6 +1356,16 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
+        serviceHero?: T | ServiceHeroBlockSelect<T>;
+        featureCards?: T | FeatureCardsBlockSelect<T>;
+        serviceArea?: T | ServiceAreaBlockSelect<T>;
+        pageHeader?: T | PageHeaderBlockSelect<T>;
+        textSection?: T | TextSectionBlockSelect<T>;
+        headingSection?: T | HeadingSectionBlockSelect<T>;
+        ownerQuote?: T | OwnerQuoteBlockSelect<T>;
+        clientsGrid?: T | ClientsGridBlockSelect<T>;
+        equipmentList?: T | EquipmentListBlockSelect<T>;
+        contactInfo?: T | ContactInfoBlockSelect<T>;
         cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
@@ -1106,6 +1388,207 @@ export interface PagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceHeroBlock_select".
+ */
+export interface ServiceHeroBlockSelect<T extends boolean = true> {
+  ctaLine1?: T;
+  ctaLine2?: T;
+  headlines?:
+    | T
+    | {
+        label?: T;
+        id?: T;
+      };
+  backgroundImageUrl?: T;
+  galleryImages?:
+    | T
+    | {
+        url?: T;
+        id?: T;
+      };
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureCardsBlock_select".
+ */
+export interface FeatureCardsBlockSelect<T extends boolean = true> {
+  cards?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        mediaType?: T;
+        youtubeId?: T;
+        imageUrl?: T;
+        imageAlt?: T;
+        buttonLabel?: T;
+        buttonHref?: T;
+        buttonExternal?: T;
+        extraButtonLabel?: T;
+        extraButtonHref?: T;
+        id?: T;
+      };
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceAreaBlock_select".
+ */
+export interface ServiceAreaBlockSelect<T extends boolean = true> {
+  cities?: T;
+  tagline?: T;
+  states?: T;
+  ctaLabel?: T;
+  ctaHref?: T;
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PageHeaderBlock_select".
+ */
+export interface PageHeaderBlockSelect<T extends boolean = true> {
+  title?: T;
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextSectionBlock_select".
+ */
+export interface TextSectionBlockSelect<T extends boolean = true> {
+  content?: T;
+  color?: T;
+  fontSize?: T;
+  textAlign?: T;
+  bold?: T;
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeadingSectionBlock_select".
+ */
+export interface HeadingSectionBlockSelect<T extends boolean = true> {
+  text?: T;
+  level?: T;
+  color?: T;
+  fontSize?: T;
+  textAlign?: T;
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "OwnerQuoteBlock_select".
+ */
+export interface OwnerQuoteBlockSelect<T extends boolean = true> {
+  photoUrl?: T;
+  quote?: T;
+  name?: T;
+  role?: T;
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ClientsGridBlock_select".
+ */
+export interface ClientsGridBlockSelect<T extends boolean = true> {
+  heading?: T;
+  variant?: T;
+  items?:
+    | T
+    | {
+        name?: T;
+        id?: T;
+      };
+  moreText?: T;
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EquipmentListBlock_select".
+ */
+export interface EquipmentListBlockSelect<T extends boolean = true> {
+  logos?:
+    | T
+    | {
+        url?: T;
+        alt?: T;
+        id?: T;
+      };
+  groups?:
+    | T
+    | {
+        heading?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactInfoBlock_select".
+ */
+export interface ContactInfoBlockSelect<T extends boolean = true> {
+  phone?: T;
+  email?: T;
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "CallToActionBlock_select".
  */
 export interface CallToActionBlockSelect<T extends boolean = true> {
@@ -1125,6 +1608,10 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
   id?: T;
   blockName?: T;
 }
@@ -1151,6 +1638,10 @@ export interface ContentBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
   id?: T;
   blockName?: T;
 }
@@ -1160,6 +1651,10 @@ export interface ContentBlockSelect<T extends boolean = true> {
  */
 export interface MediaBlockSelect<T extends boolean = true> {
   media?: T;
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
   id?: T;
   blockName?: T;
 }
@@ -1174,6 +1669,10 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
   categories?: T;
   limit?: T;
   selectedDocs?: T;
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
   id?: T;
   blockName?: T;
 }
@@ -1185,6 +1684,10 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  spacingTop?: T;
+  spacingBottom?: T;
+  spacingLeft?: T;
+  spacingRight?: T;
   id?: T;
   blockName?: T;
 }
@@ -1409,6 +1912,7 @@ export interface FormsSelect<T extends boolean = true> {
               label?: T;
               width?: T;
               required?: T;
+              placeholder?: T;
               id?: T;
               blockName?: T;
             };
@@ -1427,6 +1931,7 @@ export interface FormsSelect<T extends boolean = true> {
               width?: T;
               defaultValue?: T;
               required?: T;
+              placeholder?: T;
               id?: T;
               blockName?: T;
             };
@@ -1467,6 +1972,7 @@ export interface FormsSelect<T extends boolean = true> {
               width?: T;
               defaultValue?: T;
               required?: T;
+              placeholder?: T;
               id?: T;
               blockName?: T;
             };
@@ -1478,6 +1984,7 @@ export interface FormsSelect<T extends boolean = true> {
               width?: T;
               defaultValue?: T;
               required?: T;
+              placeholder?: T;
               id?: T;
               blockName?: T;
             };
@@ -1637,6 +2144,17 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: string;
+  /**
+   * URL or path of the header logo image.
+   */
+  logoUrl?: string | null;
+  /**
+   * URL or path of the centered tagline image.
+   */
+  taglineUrl?: string | null;
+  phone?: string | null;
+  facebookUrl?: string | null;
+  twitterUrl?: string | null;
   navItems?:
     | {
         link: {
@@ -1666,6 +2184,16 @@ export interface Header {
  */
 export interface Footer {
   id: string;
+  /**
+   * URL or path of the footer logo image.
+   */
+  logoUrl?: string | null;
+  phone?: string | null;
+  facebookUrl?: string | null;
+  /**
+   * Shown in the copyright line: © {year} {companyName}.
+   */
+  companyName?: string | null;
   navItems?:
     | {
         link: {
@@ -1694,6 +2222,11 @@ export interface Footer {
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
+  logoUrl?: T;
+  taglineUrl?: T;
+  phone?: T;
+  facebookUrl?: T;
+  twitterUrl?: T;
   navItems?:
     | T
     | {
@@ -1717,6 +2250,10 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
+  logoUrl?: T;
+  phone?: T;
+  facebookUrl?: T;
+  companyName?: T;
   navItems?:
     | T
     | {

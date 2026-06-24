@@ -5,10 +5,8 @@ import { useRouter } from 'next/navigation'
 import React, { useCallback, useState } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 import RichText from '@/components/RichText'
-import { Button } from '@/components/ui/button'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 
-import { fields } from './fields'
 import { getClientSideURL } from '@/utilities/getURL'
 
 export type FormBlockType = {
@@ -18,6 +16,9 @@ export type FormBlockType = {
   form: FormType
   introContent?: DefaultTypedEditorState
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Field = any
 
 export const FormBlock: React.FC<
   {
@@ -35,7 +36,6 @@ export const FormBlock: React.FC<
     defaultValues: formFromProps.fields,
   })
   const {
-    control,
     formState: { errors },
     handleSubmit,
     register,
@@ -57,7 +57,6 @@ export const FormBlock: React.FC<
           value,
         }))
 
-        // delay loading indicator by 1s
         loadingTimerID = setTimeout(() => {
           setIsLoading(true)
         }, 1000)
@@ -80,12 +79,10 @@ export const FormBlock: React.FC<
 
           if (req.status >= 400) {
             setIsLoading(false)
-
             setError({
               message: res.errors?.[0]?.message || 'Internal Server Error',
               status: res.status,
             })
-
             return
           }
 
@@ -94,10 +91,7 @@ export const FormBlock: React.FC<
 
           if (confirmationType === 'redirect' && redirect) {
             const { url } = redirect
-
-            const redirectUrl = url
-
-            if (redirectUrl) router.push(redirectUrl)
+            if (url) router.push(url)
           }
         } catch (err) {
           console.warn(err)
@@ -114,50 +108,114 @@ export const FormBlock: React.FC<
   )
 
   return (
-    <div className="container lg:max-w-[48rem]">
+    <div className="content-form">
       {enableIntro && introContent && !hasSubmitted && (
-        <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
+        <RichText className="content-form-intro" data={introContent} enableGutter={false} />
       )}
-      <div className="p-4 lg:p-6 border border-border rounded-[0.8rem]">
-        <FormProvider {...formMethods}>
-          {!isLoading && hasSubmitted && confirmationType === 'message' && (
-            <RichText data={confirmationMessage} />
-          )}
-          {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
-          {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
-          {!hasSubmitted && (
-            <form id={formID} onSubmit={handleSubmit(onSubmit)}>
-              <div className="mb-4 last:mb-0">
-                {formFromProps &&
-                  formFromProps.fields &&
-                  formFromProps.fields?.map((field, index) => {
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    const Field: React.FC<any> = fields?.[field.blockType as keyof typeof fields]
-                    if (Field) {
-                      return (
-                        <div className="mb-6 last:mb-0" key={index}>
-                          <Field
-                            form={formFromProps}
-                            {...field}
-                            {...formMethods}
-                            control={control}
-                            errors={errors}
-                            register={register}
-                          />
-                        </div>
-                      )
-                    }
-                    return null
-                  })}
-              </div>
 
-              <Button form={formID} type="submit" variant="default">
-                {submitButtonLabel}
-              </Button>
-            </form>
-          )}
-        </FormProvider>
-      </div>
+      <FormProvider {...formMethods}>
+        {!isLoading && hasSubmitted && confirmationType === 'message' && (
+          <div className="content-form-success">
+            <RichText data={confirmationMessage} enableGutter={false} />
+          </div>
+        )}
+        {isLoading && !hasSubmitted && <p className="content-form-intro">Loading, please wait...</p>}
+
+        {!hasSubmitted && (
+          <form id={formID} onSubmit={handleSubmit(onSubmit)}>
+            <div className="content-form-fields">
+              {error && (
+                <p className="content-form-error">{`${error.status || '500'}: ${error.message || ''}`}</p>
+              )}
+
+              {formFromProps?.fields?.map((field: Field, index: number) => {
+                const { blockType, name, label, required } = field
+
+                if (blockType === 'message') {
+                  return (
+                    <div className="content-form-intro" key={index}>
+                      {field.message && <RichText data={field.message} enableGutter={false} />}
+                    </div>
+                  )
+                }
+
+                if (blockType === 'checkbox') {
+                  return (
+                    <div className="content-form-field" key={index}>
+                      <label className="content-form-label flex items-center gap-2">
+                        <input
+                          type="checkbox"
+                          className="w-auto!"
+                          {...register(name, { required })}
+                        />
+                        {label}
+                        {required && <span className="content-form-required">*</span>}
+                      </label>
+                    </div>
+                  )
+                }
+
+                return (
+                  <div className="content-form-field" key={index}>
+                    {label && (
+                      <label className="content-form-label" htmlFor={name}>
+                        {label}
+                        {required && <span className="content-form-required"> *</span>}
+                      </label>
+                    )}
+
+                    {blockType === 'textarea' ? (
+                      <textarea
+                        id={name}
+                        placeholder={field.placeholder}
+                        rows={5}
+                        {...register(name, { required })}
+                      />
+                    ) : blockType === 'select' ? (
+                      <select id={name} {...register(name, { required })}>
+                        <option value="">Select…</option>
+                        {(field.options || []).map(
+                          (opt: { label: string; value: string }, i: number) => (
+                            <option key={i} value={opt.value}>
+                              {opt.label}
+                            </option>
+                          ),
+                        )}
+                      </select>
+                    ) : (
+                      <input
+                        id={name}
+                        type={
+                          blockType === 'email'
+                            ? 'email'
+                            : blockType === 'number'
+                              ? 'number'
+                              : 'text'
+                        }
+                        placeholder={field.placeholder}
+                        {...register(name, { required })}
+                      />
+                    )}
+
+                    {errors[name] && (
+                      <span className="text-[12px] text-[#b91c1c]">This field is required.</span>
+                    )}
+                  </div>
+                )
+              })}
+
+              <button
+                className="me-btn me-btn-teal content-form-submit"
+                disabled={isLoading}
+                form={formID}
+                type="submit"
+              >
+                {isLoading ? 'Sending...' : submitButtonLabel}
+              </button>
+            </div>
+          </form>
+        )}
+      </FormProvider>
     </div>
   )
 }

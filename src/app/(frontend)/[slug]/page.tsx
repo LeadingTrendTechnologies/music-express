@@ -6,6 +6,17 @@ import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
 import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
 import { homeStatic } from '@/endpoints/seed/home-static'
+import { aboutStatic } from '@/endpoints/seed/about-static'
+import { clientsStatic } from '@/endpoints/seed/clients-static'
+import { equipmentStatic } from '@/endpoints/seed/equipment-static'
+import Link from 'next/link'
+
+const staticPages: Record<string, RequiredDataFromCollectionSlug<'pages'>> = {
+  home: homeStatic,
+  'about-us': aboutStatic,
+  clients: clientsStatic,
+  equipment: equipmentStatic,
+}
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
@@ -56,8 +67,8 @@ export default async function Page({ params: paramsPromise }: Args) {
   })
 
   // Remove this code once your website is seeded
-  if (!page && slug === 'home') {
-    page = homeStatic
+  if (!page && staticPages[decodedSlug]) {
+    page = staticPages[decodedSlug]
   }
 
   if (!page) {
@@ -67,7 +78,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { hero, layout } = page
 
   return (
-    <article className="pt-16 pb-24">
+    <article>
       <PageClient />
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
@@ -76,6 +87,14 @@ export default async function Page({ params: paramsPromise }: Args) {
 
       <RenderHero {...hero} />
       <RenderBlocks blocks={layout} />
+
+      {decodedSlug !== 'home' && (
+        <div className="mx-auto max-w-[1000px] px-5 pb-[60px]">
+          <Link href="/" className="me-btn me-btn-gray mx-auto mt-[30px] block w-fit">
+            Back to Home
+          </Link>
+        </div>
+      )}
     </article>
   )
 }

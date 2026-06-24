@@ -4,9 +4,19 @@ import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
+import { ClientsGrid } from '../../blocks/ClientsGrid/config'
+import { ContactInfo } from '../../blocks/ContactInfo/config'
 import { Content } from '../../blocks/Content/config'
+import { EquipmentList } from '../../blocks/EquipmentList/config'
+import { FeatureCards } from '../../blocks/FeatureCards/config'
 import { FormBlock } from '../../blocks/Form/config'
+import { HeadingSection } from '../../blocks/HeadingSection/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { OwnerQuote } from '../../blocks/OwnerQuote/config'
+import { PageHeader } from '../../blocks/PageHeader/config'
+import { ServiceArea } from '../../blocks/ServiceArea/config'
+import { ServiceHero } from '../../blocks/ServiceHero/config'
+import { TextSection } from '../../blocks/TextSection/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -72,7 +82,23 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [
+                ServiceHero,
+                FeatureCards,
+                ServiceArea,
+                PageHeader,
+                TextSection,
+                HeadingSection,
+                OwnerQuote,
+                ClientsGrid,
+                EquipmentList,
+                ContactInfo,
+                CallToAction,
+                Content,
+                MediaBlock,
+                Archive,
+                FormBlock,
+              ],
               required: true,
               admin: {
                 initCollapsed: true,

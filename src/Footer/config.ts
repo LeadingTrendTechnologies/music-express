@@ -10,6 +10,28 @@ export const Footer: GlobalConfig = {
   },
   fields: [
     {
+      name: 'logoUrl',
+      type: 'text',
+      defaultValue: '/icons/footer-logo.png',
+      admin: { description: 'URL or path of the footer logo image.' },
+    },
+    {
+      name: 'phone',
+      type: 'text',
+      defaultValue: '574-536-7147',
+    },
+    {
+      name: 'facebookUrl',
+      type: 'text',
+      defaultValue: 'https://facebook.com/',
+    },
+    {
+      name: 'companyName',
+      type: 'text',
+      defaultValue: 'Music Express',
+      admin: { description: 'Shown in the copyright line: © {year} {companyName}.' },
+    },
+    {
       name: 'navItems',
       type: 'array',
       fields: [

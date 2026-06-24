@@ -7,6 +7,8 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
+import { blockSpacing, createSpacingFields } from '../shared/spacing'
+
 export const FormBlock: Block = {
   slug: 'formBlock',
   interfaceName: 'FormBlock',
@@ -40,6 +42,7 @@ export const FormBlock: Block = {
       }),
       label: 'Intro Content',
     },
+    createSpacingFields(blockSpacing.formBlock),
   ],
   graphQL: {
     singularName: 'FormBlock',

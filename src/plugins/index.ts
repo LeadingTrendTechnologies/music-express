@@ -1,9 +1,9 @@
-import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
+import { formBuilderPlugin, fields as formBuilderFields } from '@payloadcms/plugin-form-builder'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
-import { Plugin } from 'payload'
+import { Block, Plugin } from 'payload'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
@@ -21,6 +21,25 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
   const url = getServerSideURL()
 
   return doc?.slug ? `${url}/${doc.slug}` : url
+}
+
+// Adds an editable "Placeholder" field to a form-builder field block.
+const withPlaceholder = (slug: string): Block => {
+  const block = formBuilderFields[slug] as Block
+  return {
+    ...block,
+    fields: [
+      ...block.fields,
+      {
+        name: 'placeholder',
+        type: 'text',
+        label: 'Placeholder',
+        admin: {
+          description: 'Optional placeholder text shown inside the field.',
+        },
+      },
+    ],
+  }
 }
 
 export const plugins: Plugin[] = [
@@ -57,6 +76,10 @@ export const plugins: Plugin[] = [
   formBuilderPlugin({
     fields: {
       payment: false,
+      text: withPlaceholder('text'),
+      textarea: withPlaceholder('textarea'),
+      number: withPlaceholder('number'),
+      email: withPlaceholder('email'),
     },
     formOverrides: {
       fields: ({ defaultFields }) => {
